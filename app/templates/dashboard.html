@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Home Dashboard{% endblock %}
+
+{% block content %}
+<div class="min-h-screen py-8 px-4">
+    <div class="max-w-7xl mx-auto">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <h1 class="text-4xl font-bold text-gray-900 flex items-center">
+                    <i class="fas fa-home text-blue-600 mr-3"></i>
+                    Home Dashboard
+                </h1>
+                <p class="text-gray-600 mt-2">Your self-hosted services</p>
+            </div>
+            <a 
+                href="/logout" 
+                class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition duration-200 flex items-center"
+            >
+                <i class="fas fa-sign-out-alt mr-2"></i>Logout
+            </a>
+        </div>
+        
+        <!-- Services Grid -->
+        {% if services %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {% for service in services %}
+            <a 
+                href="{{ service.url }}" 
+                target="_blank"
+                class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl hover:scale-105 transition duration-200 transform"
+            >
+                <div class="flex flex-col items-center text-center">
+                    <div class="text-5xl mb-4 text-blue-600">
+                        <i class="{{ service.icon }}"></i>
+                    </div>
+                    <h2 class="text-xl font-bold text-gray-900 mb-2">{{ service.name }}</h2>
+                    {% if service.description %}
+                    <p class="text-gray-600 text-sm">{{ service.description }}</p>
+                    {% endif %}
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="bg-yellow-100 border border-yellow-400 text-yellow-800 px-6 py-4 rounded-lg">
+            <i class="fas fa-exclamation-triangle mr-2"></i>
+            No services configured. Please edit <code>services.yaml</code> to add your services.
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

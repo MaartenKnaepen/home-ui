@@ -1,0 +1,17 @@
+services:
+  - name: Sonarr
+    url: https://sonarr.yourdomain.com
+    icon: fa-solid fa-tv
+    description: TV Series Management
+  - name: Radarr
+    url: https://radarr.yourdomain.com
+    icon: fa-solid fa-film
+    description: Movie Management
+  - name: Qbittorrent
+    url: https://qbit.yourdomain.com
+    icon: fa-solid fa-magnet
+    description: Downloads
+  - name: Portainer
+    url: https://portainer.yourdomain.com
+    icon: fa-brands fa-docker
+    description: Container Management

@@ -1,0 +1,12 @@
+services:
+  home-ui:
+    build: .
+    container_name: home-ui
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./services.yaml:/app/services.yaml  # Allow editing config without rebuilding
+    environment:
+      - DASHBOARD_PASSWORD=changeme
+      - SECRET_KEY=generate_a_random_string_here_for_production
