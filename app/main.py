@@ -87,6 +87,19 @@ async def dashboard(request: Request, user: str | None = Depends(get_current_use
     )
 
 
+@app.get("/auth/verify")
+@app.head("/auth/verify")
+async def auth_verify(request: Request, user: str | None = Depends(get_current_user)):
+    """
+    Auth verification endpoint for Nginx auth_request.
+    Returns 200 if authenticated, 401 if not.
+    """
+    if user:
+        return Response(status_code=200)
+    else:
+        return Response(status_code=401)
+
+
 @app.get("/health")
 async def health_check():
     """Health check endpoint."""

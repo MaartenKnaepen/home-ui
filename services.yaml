@@ -1,17 +1,40 @@
 services:
-  - name: Sonarr
-    url: https://sonarr.yourdomain.com
+  - name: Overseerr
+    url: /overseerr
+    icon: fa-solid fa-magnifying-glass
+    description: Request Manager
+
+  - name: Jellyfin
+    url: /jellyfin
+    icon: fa-solid fa-play
+    description: Media Server
+
+  - name: Sonarr (1080p)
+    url: /sonarr-1080p
     icon: fa-solid fa-tv
-    description: TV Series Management
-  - name: Radarr
-    url: https://radarr.yourdomain.com
+    description: TV Series (Standard)
+
+  - name: Sonarr (4K)
+    url: /sonarr-4k
+    icon: fa-solid fa-tv
+    description: TV Series (UHD)
+
+  - name: Radarr (1080p)
+    url: /radarr-1080p
     icon: fa-solid fa-film
-    description: Movie Management
+    description: Movies (Standard)
+
+  - name: Radarr (4K)
+    url: /radarr-4k
+    icon: fa-solid fa-film
+    description: Movies (UHD)
+
+  - name: Prowlarr
+    url: /prowlarr
+    icon: fa-solid fa-rss
+    description: Indexer Manager
+
   - name: Qbittorrent
-    url: https://qbit.yourdomain.com
+    url: /qbit
     icon: fa-solid fa-magnet
-    description: Downloads
-  - name: Portainer
-    url: https://portainer.yourdomain.com
-    icon: fa-brands fa-docker
-    description: Container Management
+    description: Download Client
