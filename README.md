@@ -12,32 +12,48 @@ A lightweight, secure homepage dashboard for your self-hosted services. Built wi
 
 ## Quick Start
 
-### Using Docker Compose (Recommended)
+### Production Deployment (Git Pull & Run)
+
+This is the recommended workflow for deploying on your server:
+
+1. **Clone the repository on your server:**
+   ```bash
+   git clone <repository-url>
+   cd home-ui
+   ```
+
+2. **Create your environment configuration:**
+   ```bash
+   cp .env.example .env
+   nano .env  # Edit with your secure password and secret key
+   ```
+
+   Generate a secure secret key:
+   ```bash
+   openssl rand -hex 32
+   ```
+
+3. **Edit `services.yaml`** to match your services (already configured with common services)
+
+4. **Build and start the application:**
+   ```bash
+   docker-compose up -d --build
+   ```
+
+5. **Access the dashboard** at `http://localhost:8000`
+
+6. **Configure Nginx** for SSO (see [Deployment with Single Sign-On](#deployment-with-single-sign-on-sso) section below)
+
+### Local Development / Testing
 
 1. **Clone or download this repository**
 
-2. **Edit `services.yaml`** to add your services:
-   ```yaml
-   services:
-     - name: Sonarr
-       url: https://sonarr.yourdomain.com
-       icon: fa-solid fa-tv
-       description: TV Series Management
-   ```
-
-3. **Set your password** in `docker-compose.yml`:
-   ```yaml
-   environment:
-     - DASHBOARD_PASSWORD=your_secure_password_here
-     - SECRET_KEY=generate_a_random_string_here
-   ```
-
-4. **Start the application**:
+2. **Start with defaults** (password: `changeme`):
    ```bash
    docker-compose up -d
    ```
 
-5. **Access the dashboard** at `http://localhost:8000`
+3. **Access the dashboard** at `http://localhost:8000`
 
 ### Manual Installation
 

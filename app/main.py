@@ -1,9 +1,13 @@
+import logging
 from fastapi import FastAPI, Request, Response, Form, HTTPException, Depends
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from itsdangerous import URLSafeTimedSerializer, BadSignature
 from app.config import Settings, load_services
 
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # Initialize FastAPI app
 app = FastAPI(title="Home Dashboard")
@@ -56,6 +60,8 @@ async def login(request: Request, password: str = Form(...)):
         )
         return response
     else:
+        # Log failed login attempt for security monitoring
+        logger.warning(f"Failed login attempt from {request.client.host}")
         # Return to login page with error
         return templates.TemplateResponse(
             "login.html",
@@ -98,6 +104,13 @@ async def auth_verify(request: Request, user: str | None = Depends(get_current_u
         return Response(status_code=200)
     else:
         return Response(status_code=401)
+
+
+@app.get("/favicon.ico", include_in_schema=False)
+@app.head("/favicon.ico", include_in_schema=False)
+async def favicon():
+    """Return empty response for favicon to avoid 404 errors in logs."""
+    return Response(status_code=204)
 
 
 @app.get("/health")
